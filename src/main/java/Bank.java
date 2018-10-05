@@ -12,6 +12,7 @@ public class Bank {
     public String bankName;
 
     public Bank() {
+
         bankName = "Illini Bank";
     }
 
@@ -29,6 +30,16 @@ public class Bank {
         /*
          * Implement this function
          */
+        if (bankAccount == null || amount < 0) {
+            return false;
+        }
+        double before = bankAccount.getAccountBalance();
+        if (before < amount) {
+            return false;
+        }
+        bankAccount.setAccountBalance(before - amount);
+        System.out.println("New balance in " + bankAccount.getOwnerName() + "'s account is" + (before - amount) + ".");
+        return true;
     }
 
     /**
@@ -45,6 +56,12 @@ public class Bank {
         /*
          * Implement this function
          */
+        if (bankAccount == null || amount < 0) {
+            return false;
+        }
+        bankAccount.setAccountBalance(bankAccount.getAccountBalance() + amount);
+        System.out.println("New balance in " + bankAccount.getOwnerName() + "'s account is" + (bankAccount.getAccountBalance() + amount) + ".");
+        return true;
     }
 
     /**
@@ -64,6 +81,17 @@ public class Bank {
         /*
          * Implement this function
          */
+        if (source == null || destination == null || amount < 0) {
+            return false;
+        }
+        if (destination.getAccountBalance() < amount) {
+            return false;
+        }
+        source.setAccountBalance(source.getAccountBalance() - amount);
+        destination.setAccountBalance(destination.getAccountBalance() + amount);
+        System.out.println("New balance in " + source.getOwnerName() + "'s account is" + (source.getAccountBalance() - amount) + ".");
+        System.out.println("New balance in " + destination.getOwnerName() + "'s account is" + (destination.getAccountBalance() + amount) + ".");
+        return true;
     }
 
     /**
@@ -77,6 +105,7 @@ public class Bank {
         /*
          * Implement this function
          */
+        bankAccount.setOwnerName(name);
     }
 
     public static int totalAccounts = 0;
@@ -89,6 +118,7 @@ public class Bank {
         /*
          * Implement this function
          */
+        return totalAccounts;
     }
 
     /**
